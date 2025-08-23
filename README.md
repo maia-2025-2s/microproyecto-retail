@@ -1,7 +1,16 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # microproyecto-retail
 Microproyecto Retail
 =======
+=======
+# To run proyect:
+- npm i
+- npm run dev
+
+
+
+>>>>>>> ffa58f5 (Update README.md)
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
