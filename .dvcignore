@@ -1,3 +1,17 @@
-# Add patterns of files dvc should ignore, which could improve
-# the performance. Learn more at
-# https://dvc.org/doc/user-guide/dvcignore
+# Ignorar checkpoints temporales
+**/.ipynb_checkpoints
+
+# Ignorar cachés de Python
+**/__pycache__
+
+# Ignorar entornos virtuales
+.venv
+venv
+env
+
+# Ignorar archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar logs
+*.log
