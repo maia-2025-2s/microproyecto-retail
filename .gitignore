@@ -1,24 +1,38 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+# ---- Datos grandes ----
+data/
+*.csv
+*.tsv
+*.parquet
+*.feather
+*.h5
+*.pkl
+*.zip
+*.tar
+*.gz
 
-node_modules
-dist
-dist-ssr
-*.local
+# ---- DVC ----
+.dvc/cache/
+*.dvc.lock
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+# ---- Python ----
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.ipynb_checkpoints/
+
+# ---- Entornos ----
+.env
+.venv/
+venv/
+env/
+
+# ---- IDEs / OS ----
+.vscode/
+.idea/
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+Thumbs.db
+
+# ---- Archivos temporales ----
+*.swp
+*.swo
