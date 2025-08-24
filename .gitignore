@@ -1,6 +1,5 @@
 # ---- Datos grandes ----
 data/
-*.csv
 *.tsv
 *.parquet
 *.feather
@@ -13,6 +12,10 @@ data/
 # ---- DVC ----
 .dvc/cache/
 *.dvc.lock
+
+# EXCEPCIONES: permitir metadatos .dvc y el .gitignore dentro de data
+!data/**/*.dvc
+!data/.gitignore
 
 # ---- Python ----
 __pycache__/
