@@ -1,0 +1,41 @@
+# ---- Datos grandes ----
+data/
+*.tsv
+*.parquet
+*.feather
+*.h5
+*.pkl
+*.zip
+*.tar
+*.gz
+
+# ---- DVC ----
+.dvc/cache/
+*.dvc.lock
+
+# EXCEPCIONES: permitir metadatos .dvc y el .gitignore dentro de data
+!data/**/*.dvc
+!data/.gitignore
+
+# ---- Python ----
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.ipynb_checkpoints/
+
+# ---- Entornos ----
+.env
+.venv/
+venv/
+env/
+
+# ---- IDEs / OS ----
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ---- Archivos temporales ----
+*.swp
+*.swo
