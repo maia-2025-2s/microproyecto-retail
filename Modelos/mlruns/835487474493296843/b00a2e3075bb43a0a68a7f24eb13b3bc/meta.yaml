@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/SACS/microproyecto-retail/Modelos/mlruns/835487474493296843/b00a2e3075bb43a0a68a7f24eb13b3bc/artifacts
+end_time: 1757101760826
+entry_point_name: ''
+experiment_id: '835487474493296843'
+lifecycle_stage: active
+run_id: b00a2e3075bb43a0a68a7f24eb13b3bc
+run_name: omniscient-zebra-877
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1757101742734
+status: 3
+tags: []
+user_id: SACS

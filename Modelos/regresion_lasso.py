@@ -1,5 +1,9 @@
+# Modelos/regresion_lasso_grid_mlflow.py
+
 import pandas as pd
 import numpy as np
+import mlflow
+import mlflow.sklearn
 from sklearn.linear_model import Lasso
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from sklearn.model_selection import train_test_split, GridSearchCV
@@ -25,18 +29,17 @@ X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
 )
 
-# 3. Definir pipeline con escalado + Lasso
+# 3. Definir pipeline
 pipeline = Pipeline([
     ("scaler", StandardScaler()),
     ("lasso", Lasso(max_iter=10000))
 ])
 
-# 4. Definir hiperparámetros a buscar
+# 4. Definir hiperparámetros
 param_grid = {
-    "lasso__alpha": np.logspace(-3, 2, 10),   # valores de 0.001 a 100
+    "lasso__alpha": np.logspace(-3, 2, 10),
 }
 
-# 5. GridSearchCV
 grid = GridSearchCV(
     pipeline,
     param_grid,
@@ -45,27 +48,34 @@ grid = GridSearchCV(
     n_jobs=-1
 )
 
-grid.fit(X_train, y_train)
+# 5. Experimento MLflow
+mlflow.set_experiment("Regresion_Lasso")
 
-# 6. Mejor modelo
-best_model = grid.best_estimator_
-y_pred = best_model.predict(X_test)
+with mlflow.start_run():
+    grid.fit(X_train, y_train)
 
-# 7. Métricas
-rmse = np.sqrt(mean_squared_error(y_test, y_pred))
-mae = mean_absolute_error(y_test, y_pred)
-r2 = r2_score(y_test, y_pred)
+    # Mejor modelo
+    best_alpha = grid.best_params_["lasso__alpha"]
+    best_model = grid.best_estimator_
 
-print("Mejor alpha:", grid.best_params_["lasso__alpha"])
-print(f"RMSE: {rmse:.4f}")
-print(f"MAE:  {mae:.4f}")
-print(f"R²:   {r2:.4f}")
+    # Predicciones
+    y_pred = best_model.predict(X_test)
 
-# 8. Guardar resultados
-results = pd.DataFrame({
-    "y_true": y_test,
-    "y_pred": y_pred
-})
-results.to_csv("resultados_lasso.csv", index=False)
+    # Métricas
+    rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+    mae = mean_absolute_error(y_test, y_pred)
+    r2 = r2_score(y_test, y_pred)
 
-print("Resultados guardados en resultados_lasso.csv")
+    # ---- MLflow logging ----
+    mlflow.log_param("alpha", best_alpha)
+    mlflow.log_metric("RMSE", rmse)
+    mlflow.log_metric("MAE", mae)
+    mlflow.log_metric("R2", r2)
+
+    # Guardar modelo
+    mlflow.sklearn.log_model(best_model, "lasso_model")
+
+    print("Mejor alpha:", best_alpha)
+    print(f"RMSE: {rmse:.4f}")
+    print(f"MAE:  {mae:.4f}")
+    print(f"R²:   {r2:.4f}")
