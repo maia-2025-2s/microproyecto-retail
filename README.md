@@ -5,6 +5,7 @@ Este proyecto es una aplicación para la predicción de retail.
 
 ## Estructura
 
+```bash
 ├─ public/                # activos estáticos 
 ├─ src/                   # código fuente TS/TSX
 ├─ dist/                  # build de producción 
@@ -15,7 +16,7 @@ Este proyecto es una aplicación para la predicción de retail.
 ├─ tsconfig.node.json     # TS para tooling
 ├─ eslint.config.js
 └─ package.json
-
+```
 
 ## Requisitos
 
