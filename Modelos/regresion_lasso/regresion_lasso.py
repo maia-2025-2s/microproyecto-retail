@@ -38,6 +38,8 @@ pipeline = Pipeline([
 # 4. Definir hiperparámetros
 param_grid = {
     "lasso__alpha": np.logspace(-3, 2, 10),
+    "lasso__tol": [1e-4, 1e-3, 1e-2],
+    "lasso__selection": ["cyclic", "random"]
 }
 
 grid = GridSearchCV(
