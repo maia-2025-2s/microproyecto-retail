@@ -11,7 +11,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
 
 # 1. Cargar datos
-data = pd.read_csv("../EDA/data/train.csv")
+data = pd.read_csv("../../EDA/data/train.csv")
 
 # ---- EXTRA: features de fecha ----
 data["date"] = pd.to_datetime(data["date"])
@@ -49,7 +49,20 @@ grid = GridSearchCV(
 )
 
 # 5. Experimento MLflow
-mlflow.set_experiment("Regresion_Lasso")
+
+mlflow.set_tracking_uri("http://54.242.59.41:5000")
+
+# Crear experimento si no existe
+experiment_name = "Regresion_Lasso"
+
+# Verifica si existe; si no, créalo
+exp = mlflow.get_experiment_by_name(experiment_name)
+if exp is None:
+    mlflow.create_experiment(experiment_name)
+
+# Selecciona el experimento
+mlflow.set_experiment(experiment_name)
+
 
 with mlflow.start_run():
     grid.fit(X_train, y_train)
